@@ -1,4 +1,4 @@
-package clase14;
+package cajeroJAVA;
 
 public class Cuenta {
 	
