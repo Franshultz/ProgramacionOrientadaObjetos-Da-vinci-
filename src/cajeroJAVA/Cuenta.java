@@ -4,12 +4,10 @@ public class Cuenta {
 	
 	
 	private  double saldo;
-	private  Cliente cliente;
-	private  String operaciones;
+	private  String operaciones = "";
 	
-	public Cuenta(double saldo, Cliente cliente, String operaciones) {
+	public Cuenta(double saldo) {
 		this.saldo = saldo;
-		this.cliente = cliente;
 		this.operaciones = operaciones;
 	}
 
@@ -19,14 +17,6 @@ public class Cuenta {
 
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public String getOperaciones() {
@@ -40,8 +30,7 @@ public class Cuenta {
 	
 	@Override
 	public String toString() {
-		return "Cuenta [saldo=" + saldo + ", cliente=" + cliente + ", operaciones="
-				+ operaciones + "]";
+		return "Cuenta [saldo=" + saldo + ", operaciones=" + operaciones + "]";
 	}
 	
 	

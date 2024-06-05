@@ -1,16 +1,20 @@
 package cajeroJAVA;
 
+import javax.swing.JOptionPane;
+
 public class Empleado extends Usuario{
 	
 	private  String puesto;
 	private  String departamento;
 	private  int sueldo;
+	private Cuenta cuenta;
 	
-	public Empleado(String nombre, String dni, String pin, String rol, String puesto, String departamento, int sueldo) {
+	public Empleado(String nombre, String dni, String pin, String rol, String puesto, String departamento, int sueldo, Cuenta cuenta) {
 		super(nombre, dni, pin, rol);
 		this.puesto = puesto;
 		this.departamento = departamento;
 		this.sueldo = sueldo;
+		this.cuenta = cuenta;
 	}
 
 	
@@ -39,6 +43,31 @@ public class Empleado extends Usuario{
 	}
 	
 	
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Empleado [puesto=" + puesto + ", departamento=" + departamento + ", sueldo=" + sueldo + ", cuenta="
+				+ cuenta + ", toString()=" + super.toString() + "]";
+	}
+
+
+	//REESCRIBO ESTE METODO PERO CON OTRO CONTEXTO EN EMPLEADO
+	@Override
+	public void Menu(Cajero cajero) {
+		JOptionPane.showMessageDialog(null, "Bienvenido empleado");
+	}
 	
 	
+	public void AgregarDinero() {
+		
+	}
 }

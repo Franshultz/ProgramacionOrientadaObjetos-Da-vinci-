@@ -1,5 +1,7 @@
 package cajeroJAVA;
 
+import javax.swing.JOptionPane;
+
 public abstract class Usuario {
 	
 	private  String nombre;
@@ -54,6 +56,28 @@ public abstract class Usuario {
 	}
 	
 	
+	public boolean IngresarCajero(String dni, String pin) {
+		
+		if (this.getDni().equals(dni)) {
+			
+			if (this.getPin().equals(pin)) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Pin incorrecto");
+				return false;
+			}
+			
+		} else {
+			
+			JOptionPane.showMessageDialog(null, "dni incorrecto");
+			return false;
+
+		}
+	}
+	
+	public void Menu(Cajero cajero) {
+		JOptionPane.showMessageDialog(null, "Ingresaste al cajero" + cajero);
+	}
 	
 	
 	
