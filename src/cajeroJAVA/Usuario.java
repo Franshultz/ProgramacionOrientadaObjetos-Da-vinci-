@@ -76,7 +76,8 @@ public abstract class Usuario {
 	}
 	
 	public void Menu(Cajero cajero) {
-		JOptionPane.showMessageDialog(null, "Ingresaste al cajero" + cajero);
+		
+		
 	}
 	
 	

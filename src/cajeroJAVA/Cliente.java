@@ -59,11 +59,21 @@ public class Cliente extends Usuario{
 			switch (operacionElegida) {
 			case 0:
 				int montoRetirar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese monto a retirar"));
-				this.RetirarDinero(montoRetirar, cajero);
+				
+				if (this.RetirarDinero(montoRetirar, cajero)) {
+					JOptionPane.showMessageDialog(null, "Se pudo retirar el dinero");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo retirar el dinero");			
+				}
 				break;
 			case 1:
 				int montoDepositar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese monto a depositar"));
-				this.DepositarDinero(montoDepositar, cajero);
+				if (this.DepositarDinero(montoDepositar, cajero)) {
+					JOptionPane.showMessageDialog(null, "Se pudo depositar el dinero");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo depositar el dinero");
+				}
+				
 				break;
 			case 2:
 				JOptionPane.showMessageDialog(null, "Cuenta " + this.nroCuenta + "\n Operaciones: "+ this.cuenta.getOperaciones() + " Saldo: " + cuenta.getSaldo() + "\n");
@@ -79,27 +89,32 @@ public class Cliente extends Usuario{
 	
 	
 	
-	public void RetirarDinero(int monto, Cajero cajero) {
+	public boolean RetirarDinero(int monto, Cajero cajero) {
 		if (monto > 0 && monto <= this.cuenta.getSaldo()) {
 			if (monto <= cajero.getSaldo()) {
 				cajero.setSaldo(cajero.getSaldo() - monto); 
 				this.cuenta.setSaldo(this.cuenta.getSaldo() - monto);
 				cuenta.setOperaciones(cuenta.getOperaciones() + "Retire dinero: Fecha: " + LocalDateTime.now() + " Monto a retirar: " + monto + "\n");
+				return true;
 			} else {
 				JOptionPane.showMessageDialog(null, "No hay suficiente dinero en el cajero");
+				return false;
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay suficiente dinero en la cuenta");
+			return false;
 		}
 	}
 	
-	public void DepositarDinero(int monto, Cajero cajero) {
+	public boolean DepositarDinero(int monto, Cajero cajero) {
 		if (monto > 0) {
 			cajero.setSaldo(cajero.getSaldo() + monto); 
 			this.cuenta.setSaldo(this.cuenta.getSaldo() + monto);
 			cuenta.setOperaciones(cuenta.getOperaciones() + "Deposite dinero: Fecha: " + LocalDateTime.now() + " Monto a depositar: " + monto + "\n");
+			return true;
 		} else {
 			JOptionPane.showMessageDialog(null, "No hay suficiente dinero en la cuenta");
+			return false;
 		}
 		
 	}
