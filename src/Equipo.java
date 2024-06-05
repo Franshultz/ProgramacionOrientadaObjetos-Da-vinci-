@@ -7,11 +7,15 @@ public class Equipo {
 	private  String nombreClub;
 	private  String ciudad;
 	private LinkedList<Jugador> jugadores;
+	private int puntos;
+	private int goles;
 	
 	public Equipo(String nombreClub, String ciudad) {
 		this.nombreClub = nombreClub;
 		this.ciudad = ciudad;
 		this.jugadores = new LinkedList<>();
+		this.puntos = 0;
+		this.goles = 0;
 	}
 
 	public String getNombreClub() {
@@ -40,13 +44,31 @@ public class Equipo {
     }
 
 	
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
+	public int getGoles() {
+		return goles;
+	}
+
+	public void setGoles(int goles) {
+		this.goles = goles;
+	}
+
 
 	
 	@Override
 	public String toString() {
-		return "Equipo [nombreClub=" + nombreClub + ", ciudad=" + ciudad + ", jugadores=" + jugadores +"]";
+		return "Equipo [nombreClub=" + nombreClub + ", ciudad=" + ciudad + ", jugadores=" + jugadores + ", puntos="
+				+ puntos + ", goles=" + goles + "]" + "\n";
 	}
 
+	
 	//AGREGO EQUIPO ENTERO
 	public void AgregarListaJugadores(LinkedList<Jugador> ListaJugadores) {
         this.setJugadores(ListaJugadores);
@@ -88,16 +110,16 @@ public class Equipo {
                     break;
                 }
             }
-            setJugadores(jugadores); // Actualizar la lista de jugadores del equipo después de la eliminación
+            setJugadores(jugadores);
             return true;
         } else {
             return false;
         }
     }
 	
-	
+	//RETORNO CANTIDAD DE JUGADORES
 	public int CantidadJugadores() {
-		int cantidadJugadores = getJugadores().size();
+		int cantidadJugadores = this.getJugadores().size();
 		return cantidadJugadores;
 	}     
 	
