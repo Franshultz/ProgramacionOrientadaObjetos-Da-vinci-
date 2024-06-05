@@ -121,12 +121,13 @@ public class GestorEquipos {
 
 	
 	
-	
+	//RETORNO CANTIDAD DE EQUIPOS
 	public int CantidadEquipos() {
 		return equipos.size();
 	};
 	
 	
+	//RETORNO LISTA DE EQUIPOS
 	public LinkedList ObtenerListaEquipos() {
 		return equipos;
 	}

@@ -79,7 +79,7 @@ public class Main {
 				
 			case 3:
 				
-				JOptionPane.showMessageDialog(null, "Lista de jugadores: \n" + equipo[eleccionEquipo].getJugadores());
+				JOptionPane.showMessageDialog(null, "Lista de jugadores: \n" + equipo[eleccionEquipo].ObtenerListaJugadores());
 				break;
 				
 			case 4:
@@ -154,8 +154,7 @@ public class Main {
 			String[] opciones= {"Si", "No"};
 			eleccion = JOptionPane.showOptionDialog(null, "¿Desea comenzar los partidos?", "Partidos", 0, 0, null, opciones, opciones[0]);
 			if (eleccion == 0) {
-				JOptionPane.showMessageDialog(null, liga.JugarPartido());
-				JOptionPane.showMessageDialog(null, liga.toString());			
+				JOptionPane.showMessageDialog(null, liga.JugarPartido());			
 			}
 			
 		} while (eleccion != 1);

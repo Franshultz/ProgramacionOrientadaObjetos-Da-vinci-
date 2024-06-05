@@ -124,4 +124,10 @@ public class Equipo {
 	}     
 	
 	
+	//RETORNO LISTA DE JUGADORES DE DETERMINADO EQUIPO
+	public LinkedList ObtenerListaJugadores() {
+		return this.jugadores;
+	}
+	
+	
 }
