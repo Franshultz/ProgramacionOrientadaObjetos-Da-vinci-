@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 public class Main {
 
 	public static void main(String[] args) {
-		LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>();
 		for (int i = 0; i < 4; i++) {
+			LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>();
 			String nombreClub = JOptionPane.showInputDialog("Ingrese nombre del Club: ");
 			String ciudad = JOptionPane.showInputDialog("Ingrese nombre de la Ciudad del club: ");
 			
@@ -21,8 +21,7 @@ public class Main {
 				ListaJugadores.add(jugador);
 		    }
 			equipo.AgregarListaJugadores(ListaJugadores);
-			
-		
+
 	    }
 	}
 
