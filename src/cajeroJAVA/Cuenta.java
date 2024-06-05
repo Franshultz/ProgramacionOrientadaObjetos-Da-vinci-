@@ -3,24 +3,14 @@ package cajeroJAVA;
 public class Cuenta {
 	
 	
-	private  int nroCliente;
 	private  double saldo;
 	private  Cliente cliente;
 	private  String operaciones;
 	
-	public Cuenta(int nroCliente, double saldo, Cliente cliente, String operaciones) {
-		this.nroCliente = nroCliente;
+	public Cuenta(double saldo, Cliente cliente, String operaciones) {
 		this.saldo = saldo;
 		this.cliente = cliente;
 		this.operaciones = operaciones;
-	}
-
-	public int getNroCliente() {
-		return nroCliente;
-	}
-
-	public void setNroCliente(int nroCliente) {
-		this.nroCliente = nroCliente;
 	}
 
 	public double getSaldo() {
@@ -50,7 +40,7 @@ public class Cuenta {
 	
 	@Override
 	public String toString() {
-		return "Cuenta [nroCliente=" + nroCliente + ", saldo=" + saldo + ", cliente=" + cliente + ", operaciones="
+		return "Cuenta [saldo=" + saldo + ", cliente=" + cliente + ", operaciones="
 				+ operaciones + "]";
 	}
 	
