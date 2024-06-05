@@ -4,12 +4,12 @@ public class Equipo {
 	
 	private  String nombreClub;
 	private  String ciudad;
-	private  LinkedList Jugadores;
+	private  LinkedList Jugadores = null;
 	
-	public Equipo(String nombreClub, String ciudad, LinkedList jugadores) {
+	public Equipo(String nombreClub, String ciudad) {
 		this.nombreClub = nombreClub;
 		this.ciudad = ciudad;
-		Jugadores = jugadores;
+		this.Jugadores = Jugadores;
 	}
 
 	public String getNombreClub() {
@@ -40,6 +40,10 @@ public class Equipo {
 	public String toString() {
 		return "Equipo [nombreClub=" + nombreClub + ", ciudad=" + ciudad + ", Jugadores=" + Jugadores + "]";
 	}
+	
+	public void AgregarListaJugadores(LinkedList<?> ListaJugadores) {
+		
+	} 
 	
 	
 	
