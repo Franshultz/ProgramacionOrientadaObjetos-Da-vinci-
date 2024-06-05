@@ -22,6 +22,27 @@ public class GestorEquipos {
 	}
 	
 	
+	public String JugarPartido() {
+		
+	}
+	
+	public boolean AgregarEquipo() {
+		
+	}
+	
+	public boolean EliminarEquipo() {
+		
+	}
+	
+	public int CantidadEquipos() {
+		
+	};
+	
+	public LinkedList ObtenerListaEquipos() {
+		
+	}
+	
+	
 	
 	
 	

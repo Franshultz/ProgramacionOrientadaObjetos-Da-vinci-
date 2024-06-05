@@ -8,8 +8,10 @@ public class Main {
 		
 		//CREO EQUIPOS Y JUGADORES
 		Equipo[] equipo = new Equipo[2];
+		LinkedList<Equipo> ListaEquipos = new LinkedList<Equipo>();
+		LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>();
+		
 		for (int i = 0; i < 2; i++) {
-			LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>();
 			String nombreClub = JOptionPane.showInputDialog("Ingrese nombre del Club: ");
 			String ciudad = JOptionPane.showInputDialog("Ingrese nombre de la Ciudad del club: ");
 			
@@ -21,10 +23,13 @@ public class Main {
 				String numeroCamiseta = JOptionPane.showInputDialog("Ingrese Numero de camiseta: ");
 				String edadJugador = JOptionPane.showInputDialog("Ingrese Edad de jugador: ");
 			
-				jugador[i] = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
-				ListaJugadores.add(jugador[i]);
+				jugador[index] = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
+				ListaJugadores.add(jugador[index]);
 		    }
 			equipo[i].AgregarListaJugadores(ListaJugadores);
+			
+			ListaEquipos.add(equipo[i]);
+			GestorEquipos liga = new GestorEquipos(ListaEquipos);
 	    }
 		
 		int eleccionEquipo = 0;
@@ -43,6 +48,7 @@ public class Main {
 			
 			switch (eleccionOperacion) {
 			case 0:
+				
 				if(equipo[eleccionEquipo].AgregarJugador()) {
 					JOptionPane.showMessageDialog(null, "Se agrego exitosamente el jugador al equipo");
 					JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
@@ -50,7 +56,9 @@ public class Main {
 					JOptionPane.showMessageDialog(null, "No se agrego ningun jugador al equipo");
 				}
 				break;
+				
 			case 1:
+				
 				if(equipo[eleccionEquipo].EliminarJugador()) {
 					JOptionPane.showMessageDialog(null, "Se elimino exitosamente el jugador del equipo");
 					JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
@@ -61,8 +69,13 @@ public class Main {
 				break;
 			case 2:
 				
+				JOptionPane.showMessageDialog(null, "El " + equipo[eleccionEquipo].getNombreClub() +
+						" tiene " +  equipo[eleccionEquipo].CantidadJugadores() + " jugadores"); 
+				
 				break;
 			case 3:
+				
+				JOptionPane.showMessageDialog(null, "Lista de jugadore: \n" + equipo[eleccionEquipo].getJugadores());
 				
 				break;
 			case 4:

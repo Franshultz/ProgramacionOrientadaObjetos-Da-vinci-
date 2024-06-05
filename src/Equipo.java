@@ -31,24 +31,27 @@ public class Equipo {
 	}
 
 
-	public LinkedList getJugadores() {
+	public LinkedList<Jugador> getJugadores() {
 		return jugadores;
 	}
 
-	public void setJugadores(LinkedList jugadores) {
-		jugadores = jugadores;
-	}
-
-	@Override
-	public String toString() {
-		return "Equipo [nombreClub=" + nombreClub + ", ciudad=" + ciudad + ", Jugadores=" + jugadores + "]";
-	}
+	public void setJugadores(LinkedList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
 
 	
+
+	
+	@Override
+	public String toString() {
+		return "Equipo [nombreClub=" + nombreClub + ", ciudad=" + ciudad + ", jugadores=" + jugadores +"]";
+	}
+
 	//AGREGO EQUIPO ENTERO
-	public void AgregarListaJugadores(LinkedList ListaJugadores) {
-		this.setJugadores(ListaJugadores);
-	} 
+	public void AgregarListaJugadores(LinkedList<Jugador> ListaJugadores) {
+        this.setJugadores(ListaJugadores);
+    }
+	
 	
 	//AGREGO JUGADOR ESPECIFICO
 	public boolean AgregarJugador() {
@@ -67,6 +70,8 @@ public class Equipo {
 		}
 	}
 	
+	
+	//ELIMINO JUGADOR ESPECIFICO
 	public boolean EliminarJugador() {
         String[] nombresJugadoresEliminar = new String[jugadores.size()];
         int i = 0;
@@ -74,30 +79,27 @@ public class Equipo {
             nombresJugadoresEliminar[i] = jugador.getNombre();
             i++;
         }
-        
-        
-        String seleccionJugadorEliminar = (String)JOptionPane.showInputDialog(null, "Seleccione una opción:", "Menú", JOptionPane.QUESTION_MESSAGE, null, nombresJugadoresEliminar, nombresJugadoresEliminar[0]);
+
+        String seleccionJugadorEliminar = (String) JOptionPane.showInputDialog(null, "Seleccione una opción:", "Menú", JOptionPane.QUESTION_MESSAGE, null, nombresJugadoresEliminar, nombresJugadoresEliminar[0]);
         if (seleccionJugadorEliminar != null) {
-        	for (int index = 0; index < jugadores.size(); index++) {
-        		if (jugadores.get(index).getNombre().equals(seleccionJugadorEliminar)) {
-        			jugadores.remove(index);
-        		}
-        	}	
-        	return true;
-		} else {
-			return false;
-		}
-	}
+            for (int index = 0; index < jugadores.size(); index++) {
+                if (jugadores.get(index).getNombre().equals(seleccionJugadorEliminar)) {
+                    jugadores.remove(index);
+                    break;
+                }
+            }
+            setJugadores(jugadores); // Actualizar la lista de jugadores del equipo después de la eliminación
+            return true;
+        } else {
+            return false;
+        }
+    }
 	
-	public boolean CantidadJugadores() {
-		
-		return true;
+	
+	public int CantidadJugadores() {
+		int cantidadJugadores = getJugadores().size();
+		return cantidadJugadores;
 	}     
-	
-	public LinkedList ObtenerListaJugadores() {
-		
-		return jugadores;
-	}
 	
 	
 }
