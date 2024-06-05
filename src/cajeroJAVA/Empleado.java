@@ -63,11 +63,42 @@ public class Empleado extends Usuario{
 	//REESCRIBO ESTE METODO PERO CON OTRO CONTEXTO EN EMPLEADO
 	@Override
 	public void Menu(Cajero cajero) {
-		JOptionPane.showMessageDialog(null, "Bienvenido empleado");
+		String[] operacion = {
+				"Agregar Dinero",
+				"Salir"
+		};
+		int operacionElegida = 0;
+		
+		do {
+			
+			operacionElegida = JOptionPane.showOptionDialog(null, "Elija operacion:", "Cliente", 0, 0, null, operacion, operacion[0]);
+			
+			switch (operacionElegida) {
+			case 0:
+				int montoAgregar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese monto para agregar"));
+				
+				if (this.AgregarDinero(montoAgregar, cajero)) {
+					JOptionPane.showMessageDialog(null, "Se pudo retirar el dinero");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo retirar el dinero");			
+				}
+				break;
+			case 1:
+					JOptionPane.showMessageDialog(null, "No se agrego ningun monto al cajero de: " + cajero.getUbicaion());
+				break;
+			
+			}
+		} while (operacionElegida !=1);
 	}
 	
 	
-	public void AgregarDinero() {
-		
+	public boolean AgregarDinero(int monto, Cajero cajero) {
+		if (monto > 0) {
+			cajero.setSaldo(cajero.getSaldo() + monto);
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Hubo un error al agregar dinero en el cajero");
+			return false;
+		}
 	}
 }
