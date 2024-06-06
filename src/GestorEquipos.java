@@ -77,10 +77,34 @@ public class GestorEquipos {
 
         LinkedList<Jugador> ListaJugadores = new LinkedList<>();
         for (int i = 0; i < 2; i++) {
+        	boolean flag = false;
             String nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
-            String posicion = JOptionPane.showInputDialog("Ingrese posición del Jugador: ");
-            String numeroCamiseta = JOptionPane.showInputDialog("Ingrese Número de camiseta: ");
-            String edadJugador = JOptionPane.showInputDialog("Ingrese Edad del jugador: ");
+            String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
+            String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);;
+            int numeroCamiseta = 0;
+            do {	
+            	numeroCamiseta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Numero de camiseta: "));
+            	if (numeroCamiseta < 100 && numeroCamiseta > 0) {
+					JOptionPane.showMessageDialog(null, "El numero de camiseta es valido");
+					flag = true;
+				} else {
+					JOptionPane.showMessageDialog(null, "El numero de camiseta es invalido");
+					flag = false;
+				}
+			} while (flag != true);
+            
+            int edadJugador = 0;
+            do {
+                edadJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Edad de jugador: "));
+                if (edadJugador < 40 && edadJugador > 15) {
+					JOptionPane.showMessageDialog(null, "La edad del jugador es valida");
+					flag = true;
+				} else {
+					JOptionPane.showMessageDialog(null, "La edad del jugador es invalida");
+					flag = false;
+				}
+			} while (flag != true);
+            
             Jugador jugador = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
             ListaJugadores.add(jugador);
         }
@@ -128,7 +152,7 @@ public class GestorEquipos {
 	
 	
 	//RETORNO LISTA DE EQUIPOS
-	public LinkedList ObtenerListaEquipos() {
+	public LinkedList<Equipo> ObtenerListaEquipos() {
 		return equipos;
 	}
 	

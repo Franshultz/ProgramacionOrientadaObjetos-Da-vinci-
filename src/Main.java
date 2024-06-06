@@ -19,10 +19,36 @@ public class Main {
 
             LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>(); 
             for (int index = 0; index < 2; index++) {
+            	boolean flag = false;
+            	
                 String nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
-                String posicion = JOptionPane.showInputDialog("Ingrese nombre de Poscicion: ");
-                String numeroCamiseta = JOptionPane.showInputDialog("Ingrese Numero de camiseta: ");
-                String edadJugador = JOptionPane.showInputDialog("Ingrese Edad de jugador: ");
+                
+                String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
+                String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);
+                
+                int numeroCamiseta = 0;
+                do {	
+                	numeroCamiseta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Numero de camiseta: "));
+                	if (numeroCamiseta < 100 && numeroCamiseta > 0) {
+						JOptionPane.showMessageDialog(null, "El numero de camiseta es valido");
+						flag = true;
+					} else {
+						JOptionPane.showMessageDialog(null, "El numero de camiseta es invalido");
+						flag = false;
+					}
+				} while (flag != true);
+                
+                int edadJugador = 0;
+                do {
+                    edadJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Edad de jugador: "));
+                    if (edadJugador < 40 && edadJugador > 15) {
+						JOptionPane.showMessageDialog(null, "La edad del jugador es valida");
+						flag = true;
+					} else {
+						JOptionPane.showMessageDialog(null, "La edad del jugador es invalida");
+						flag = false;
+					}
+				} while (flag != true);
 
                 Jugador jugador = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
                 ListaJugadores.add(jugador);
@@ -154,7 +180,14 @@ public class Main {
 			String[] opciones= {"Si", "No"};
 			eleccion = JOptionPane.showOptionDialog(null, "¿Desea comenzar los partidos?", "Partidos", 0, 0, null, opciones, opciones[0]);
 			if (eleccion == 0) {
-				JOptionPane.showMessageDialog(null, liga.JugarPartido());			
+				JOptionPane.showMessageDialog(null, liga.JugarPartido());
+				LinkedList<Equipo> fixture = liga.ObtenerListaEquipos();
+				
+				String puntuaciones = "" ;
+				for (Equipo i : fixture) {
+					puntuaciones = puntuaciones +  "\nEl club " + i.getNombreClub() + " tiene " + i.getPuntos() +" puntos y " + i.getGoles() + " goles";
+		        }
+				JOptionPane.showMessageDialog(null, puntuaciones);
 			}
 			
 		} while (eleccion != 1);

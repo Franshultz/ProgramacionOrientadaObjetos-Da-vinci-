@@ -3,10 +3,10 @@ public class Jugador {
 
 	private  String nombre;
 	private  String posicion;
-	private  String numeroCamiseta;
-	private  String edad;
+	private  int numeroCamiseta;
+	private  int edad;
 	
-	public Jugador(String nombre, String posicion, String numeroCamiseta, String edad) {
+	public Jugador(String nombre, String posicion, int numeroCamiseta, int edad) {
 		this.nombre = nombre;
 		this.posicion = posicion;
 		this.numeroCamiseta = numeroCamiseta;
@@ -29,19 +29,20 @@ public class Jugador {
 		this.posicion = posicion;
 	}
 
-	public String getNumeroCamiseta() {
+	
+	public int getNumeroCamiseta() {
 		return numeroCamiseta;
 	}
 
-	public void setNumeroCamiseta(String numeroCamiseta) {
+	public void setNumeroCamiseta(int numeroCamiseta) {
 		this.numeroCamiseta = numeroCamiseta;
 	}
 
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 

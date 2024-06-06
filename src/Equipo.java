@@ -77,10 +77,35 @@ public class Equipo {
 	
 	//AGREGO JUGADOR ESPECIFICO
 	public boolean AgregarJugador() {
+		 boolean flag = false;
 		 String nombre = JOptionPane.showInputDialog("Ingrese nombre del jugador nuevo");
-		 String posicion = JOptionPane.showInputDialog("Ingrese posicion del jugador nuevo");
-		 String numeroCamiseta = JOptionPane.showInputDialog("Ingrese el numero de camiseta del jugador nuevo");
-		 String edadJugador = JOptionPane.showInputDialog("Ingrese la edad del jugador nuevo");
+		 
+		  String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
+          String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);
+		 
+		 int numeroCamiseta = 0;
+         do {	
+         	numeroCamiseta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Numero de camiseta: "));
+         	if (numeroCamiseta < 100 && numeroCamiseta > 0) {
+					JOptionPane.showMessageDialog(null, "El numero de camiseta es valido");
+					flag = true;
+				} else {
+					JOptionPane.showMessageDialog(null, "El numero de camiseta es invalido");
+					flag = false;
+				}
+			} while (flag != true);
+         
+         int edadJugador = 0;
+         do {
+             edadJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Edad de jugador: "));
+             if (edadJugador < 40 && edadJugador > 15) {
+					JOptionPane.showMessageDialog(null, "La edad del jugador es valida");
+					flag = true;
+				} else {
+					JOptionPane.showMessageDialog(null, "La edad del jugador es invalida");
+					flag = false;
+				}
+			} while (flag != true);
 		 Jugador jugadorNuevo = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
 		    
 		 LinkedList<Jugador> ListaJugadores = getJugadores();	    
@@ -97,6 +122,7 @@ public class Equipo {
 	public boolean EliminarJugador() {
         String[] nombresJugadoresEliminar = new String[jugadores.size()];
         int i = 0;
+        
         for (Jugador jugador : jugadores) {
             nombresJugadoresEliminar[i] = jugador.getNombre();
             i++;
@@ -125,7 +151,7 @@ public class Equipo {
 	
 	
 	//RETORNO LISTA DE JUGADORES DE DETERMINADO EQUIPO
-	public LinkedList ObtenerListaJugadores() {
+	public LinkedList<Jugador> ObtenerListaJugadores() {
 		return this.jugadores;
 	}
 	
