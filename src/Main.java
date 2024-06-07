@@ -6,58 +6,80 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		//CREO EQUIPOS Y JUGADORES
-		
-		Equipo[] equipo = new Equipo[2];
-		LinkedList<Equipo> ListaEquipos = new LinkedList<Equipo>();
-		
-		for (int i = 0; i < 2; i++) {
-			
-            String nombreClub = JOptionPane.showInputDialog("Ingrese nombre del Club: ");
-            String ciudad = JOptionPane.showInputDialog("Ingrese nombre de la Ciudad del club: ");
-            equipo[i] = new Equipo(nombreClub, ciudad);
+		Equipo[] equipo = new Equipo[7]; 
+        LinkedList<Equipo> ListaEquipos = new LinkedList<Equipo>();
+        
+        String[] clubes = {
+            "River Plate",
+            "Boca Juniors",
+            "Independiente",
+            "Racing Club",
+            "San Lorenzo",
+            "Estudiantes de La Plata",
+            "Vélez Sarsfield"
+        };
 
-            LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>(); 
-            for (int index = 0; index < 2; index++) {
-            	boolean flag = false;
-            	
-                String nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
+        String[] barrios = {
+            "Núñez",           
+            "La Boca",         
+            "Avellaneda",      
+            "Avellaneda",      
+            "Boedo",           
+            "La Plata",        
+            "Liniers"          
+        };
+        
+        String[][] jugadores = {
+            {"Franco Armani", "Milton Casco", "Leandro González Pirez", "Paulo Díaz", "Enzo Díaz", "Franco Mastantuono", "Claudio Echeverri ", "Ezequiel Barco", "Ignacio Fernández", "Facundo Colidio", "Miguel Borja"},
+            {"Sergio Romero", "Marcelo Weigandt", "Bruno Valdez", "Nicolás Figal", "Frank Fabra", "Guillermo Fernández", "Alan Varela", "Cristian Medina", "Exequiel Zeballos", "Darío Benedetto", "Sebastián Villa"},
+            {"Rodrigo Rey", "Patricio Ostachuk", "Sergio Barreto", "Edgar Elizalde", "Damián Pérez", "Iván Marcone", "Lucas Romero", "Juan Cazares", "Tomás Pozzo", "Leandro Benegas", "Martín Cauteruccio"},
+            {"Gabriel Arias", "Facundo Mura", "Leonardo Sigali", "Emiliano Insúa", "Gonzalo Piovi", "Juan Nardoni", "Aníbal Moreno", "Jonathan Gómez", "Matías Rojas", "Maximiliano Romero", "Gabriel Hauche"},
+            {"Augusto Batalla", "Gino Peruzzi", "Federico Gattoni", "Cristian Zapata", "Nicolás Fernández Mercau", "Jalil Elías", "Néstor Ortigoza", "Nahuel Barrios", "Ezequiel Cerutti", "Adam Bareiro", "Nicolás Blandi"},
+            {"Mariano Andújar", "Leonardo Godoy", "Fabián Noguera", "Agustín Rogel", "Emmanuel Mas", "Jorge Rodríguez", "Fernando Zuqui", "Manuel Castro", "Pablo Piatti", "Leandro Díaz", "Mauro Boselli"},
+            {"Leonardo Burián", "Tomás Guidara", "Miguel Brizuela", "Matías De Los Santos", "Francisco Ortega", "Santiago Cáseres", "Nicolás Garayalde", "Luca Orellano", "Luca Robertone", "Lucas Janson", "Lucas Pratto"}
+        };
+        
+        String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
+        
+        
+        for (int i = 0; i < 7; i++) {
+            equipo[i] = new Equipo(clubes[i], barrios[i]);
+            LinkedList<Jugador> ListaJugadores = new LinkedList<Jugador>();
+
+            for (int j = 0; j < 11; j++) {
+                String nombre = jugadores[i][j];
+                String posicion = "";
+               				
+                if (jugadores[i][j].equals(jugadores[i][0])) {
+            		posicion = posiciones[0];
+				} else if (jugadores[i][j].equals(jugadores[i][1]) || 
+						jugadores[i][j].equals(jugadores[i][2]) ||
+						jugadores[i][j].equals(jugadores[i][3]) ||
+						jugadores[i][j].equals(jugadores[i][4])) {
+					posicion = posiciones[1];
+				} else if (jugadores[i][j].equals(jugadores[i][5]) || 
+						jugadores[i][j].equals(jugadores[i][6]) ||
+						jugadores[i][j].equals(jugadores[i][7]) ||
+						jugadores[i][j].equals(jugadores[i][8])) {
+					posicion = posiciones[2];
+				} else if(jugadores[i][j].equals(jugadores[i][9]) || 
+						jugadores[i][j].equals(jugadores[i][10])) {
+					posicion = posiciones[3];
+				}    	
+                	
                 
-                String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
-                String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);
-                
-                int numeroCamiseta = 0;
-                do {	
-                	numeroCamiseta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Numero de camiseta: "));
-                	if (numeroCamiseta < 100 && numeroCamiseta > 0) {
-						JOptionPane.showMessageDialog(null, "El numero de camiseta es valido");
-						flag = true;
-					} else {
-						JOptionPane.showMessageDialog(null, "El numero de camiseta es invalido");
-						flag = false;
-					}
-				} while (flag != true);
-                
-                int edadJugador = 0;
-                do {
-                    edadJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Edad de jugador: "));
-                    if (edadJugador < 40 && edadJugador > 15) {
-						JOptionPane.showMessageDialog(null, "La edad del jugador es valida");
-						flag = true;
-					} else {
-						JOptionPane.showMessageDialog(null, "La edad del jugador es invalida");
-						flag = false;
-					}
-				} while (flag != true);
+                int numeroCamiseta = (int)(Math.random() * 98 + 1);
+                int edadJugador = (int)(Math.random() * 25 + 15);
 
                 Jugador jugador = new Jugador(nombre, posicion, numeroCamiseta, edadJugador);
                 ListaJugadores.add(jugador);
             }
-            equipo[i].AgregarListaJugadores(ListaJugadores);
 
+            equipo[i].AgregarListaJugadores(ListaJugadores);
             ListaEquipos.add(equipo[i]);
         }
-		GestorEquipos liga = new GestorEquipos(ListaEquipos);
+
+        GestorEquipos liga = new GestorEquipos(ListaEquipos);
 		
 		
 		
@@ -66,10 +88,11 @@ public class Main {
 		int eleccionOperacion = 0;
 		do {
 			
-			String[] opcionesEquipo = new String[2];
-	        for (int i = 0; i < 2; i++) {
+			
+			String[] opcionesEquipo = new String[7];
+	        for (int i = 0; i < 7; i++) {
 	            opcionesEquipo[i] = equipo[i].getNombreClub();
-	        }
+	       }
 	        eleccionEquipo = JOptionPane.showOptionDialog(null, "Elija una opcion", "Menu", 0, 0, null, opcionesEquipo, opcionesEquipo[0]);
 			
 			String[] operacion= {"Agregar Jugador", "Eliminar Jugador", "Ver cantidad de jugadores", "Obtener lista de jugadores", "Salir"};

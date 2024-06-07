@@ -76,7 +76,7 @@ public class GestorEquipos {
         Equipo nuevoEquipo = new Equipo(nombreClub, ciudad);
 
         LinkedList<Jugador> ListaJugadores = new LinkedList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 11; i++) {
         	boolean flag = false;
             String nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
             String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
