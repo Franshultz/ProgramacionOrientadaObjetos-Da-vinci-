@@ -71,14 +71,48 @@ public class GestorEquipos {
 	
 	//METODO PARA AGREGAR UN EQUIPO CON SUS RESPECTIVOS JUGADORES
 	public boolean AgregarEquipo() {
-        String nombreClub = JOptionPane.showInputDialog("Ingrese nombre del club que desea agregar a la liga");
-        String ciudad = JOptionPane.showInputDialog("Ingrese nombre de la ciudad del club que desea agregar a la liga");
-        Equipo nuevoEquipo = new Equipo(nombreClub, ciudad);
+		
+		boolean flag = false;
+		String nombreClub;
+		String ciudad;
+		do {
+			nombreClub = JOptionPane.showInputDialog("Ingrese nombre del club que desea agregar a la liga");
+			if (nombreClub.equals("")) {
+				JOptionPane.showMessageDialog(null, "Debe ingresar un nombre para el club");
+				flag = false;
+			} else {
+				JOptionPane.showMessageDialog(null, "El nombre del club es valido");
+				flag = true; 
+			}
+		} while (flag != true);
+				
+		do {
+			ciudad = JOptionPane.showInputDialog("Ingrese nombre de la ciudad del club que desea agregar a la liga");
+			if (ciudad.equals("")) {	
+				JOptionPane.showMessageDialog(null, "El nombre de la ciudad no es valido");
+				flag = false;
+			} else {
+				JOptionPane.showMessageDialog(null, "El nombre de la ciudad es valido");
+				flag = true; 
+			}
+		} while (flag != true);  
+		
+		Equipo nuevoEquipo = new Equipo(nombreClub, ciudad);
 
         LinkedList<Jugador> ListaJugadores = new LinkedList<>();
         for (int i = 0; i < 11; i++) {
-        	boolean flag = false;
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
+        	String nombre;
+        	do {
+        		nombre = JOptionPane.showInputDialog("Ingrese nombre de Jugador: ");
+        		if (nombre.equals("")) {
+					JOptionPane.showMessageDialog(null, "El nombre del jugador es invalido");
+					flag = false;
+				} else {
+					JOptionPane.showMessageDialog(null, "El nombre del jugador es valido");
+					flag = true;
+				}
+			} while (flag != true);
+        	
             String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
             String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);;
             int numeroCamiseta = 0;

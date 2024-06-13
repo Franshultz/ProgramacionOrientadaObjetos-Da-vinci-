@@ -29,6 +29,7 @@ public class Main {
             "Liniers"          
         };
         
+        
         String[][] jugadores = {
             {"Franco Armani", "Milton Casco", "Leandro González Pirez", "Paulo Díaz", "Enzo Díaz", "Franco Mastantuono", "Claudio Echeverri ", "Ezequiel Barco", "Ignacio Fernández", "Facundo Colidio", "Miguel Borja"},
             {"Sergio Romero", "Marcelo Weigandt", "Bruno Valdez", "Nicolás Figal", "Frank Fabra", "Guillermo Fernández", "Alan Varela", "Cristian Medina", "Exequiel Zeballos", "Darío Benedetto", "Sebastián Villa"},
@@ -86,64 +87,76 @@ public class Main {
 		
 		int eleccionEquipo = 0;
 		int eleccionOperacion = 0;
-		do {
+
 			
-			
-			String[] opcionesEquipo = new String[7];
+			LinkedList<String> ListaOpcionesEquipo = new LinkedList<>();
 	        for (int i = 0; i < 7; i++) {
-	            opcionesEquipo[i] = equipo[i].getNombreClub();
-	       }
-	        eleccionEquipo = JOptionPane.showOptionDialog(null, "Elija una opcion", "Menu", 0, 0, null, opcionesEquipo, opcionesEquipo[0]);
-			
-			String[] operacion= {"Agregar Jugador", "Eliminar Jugador", "Ver cantidad de jugadores", "Obtener lista de jugadores", "Salir"};
-			eleccionOperacion = JOptionPane.showOptionDialog(null, "Elija una opcion", "Menu", 0, 0, null, operacion, operacion[0]);
-			
-			
-			switch (eleccionOperacion) {
-			case 0:
-				
-				if(equipo[eleccionEquipo].AgregarJugador()) {
-					JOptionPane.showMessageDialog(null, "Se agrego exitosamente el jugador al equipo");
-					JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
-				} else {		
-					JOptionPane.showMessageDialog(null, "No se agrego ningun jugador al equipo");
-				}
-				break;
-				
-			case 1:
-				
-				if(equipo[eleccionEquipo].EliminarJugador()) {
-					JOptionPane.showMessageDialog(null, "Se elimino exitosamente el jugador del equipo");
-					JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
-				} else {		
-					JOptionPane.showMessageDialog(null, "No se elimino ningun jugador del equipo");
-				}				
-				break;
-				
-			case 2:
-				
-				JOptionPane.showMessageDialog(null, "El " + equipo[eleccionEquipo].getNombreClub() +
-						" tiene " +  equipo[eleccionEquipo].CantidadJugadores() + " jugadores"); 				
-				break;
-				
-			case 3:
-				
-				JOptionPane.showMessageDialog(null, "Lista de jugadores: \n" + equipo[eleccionEquipo].ObtenerListaJugadores());
-				break;
-				
-			case 4:
-				
-				JOptionPane.showMessageDialog(null, "No se realizo ninguna operacion");
-				break;
-				
-			default:
-				
-				break;
-				
+	            ListaOpcionesEquipo.add(equipo[i].getNombreClub()) ;
+	        }
+	        ListaOpcionesEquipo.add("No modificar equipo");
+	        
+	        String[] opcionesEquipo = new String[8];
+	        for (int i = 0; i < ListaOpcionesEquipo.size(); i++) {
+	        	opcionesEquipo[i] = ListaOpcionesEquipo.get(i);
 			}
+	        
+	        do {				
+	        	eleccionEquipo = JOptionPane.showOptionDialog(null, "Elija un equipo para modificar o ver jugadores", "Menu", 0, 0, null, opcionesEquipo, opcionesEquipo[0]);
+	        	
+	        	if (eleccionEquipo != 7) {
+	        		String[] operacion= {"Agregar Jugador", "Eliminar Jugador", "Ver cantidad de jugadores", "Obtener lista de jugadores", "Salir"};
+	        		eleccionOperacion = JOptionPane.showOptionDialog(null, "Elija una opcion", "Menu", 0, 0, null, operacion, operacion[0]);
+	        		
+	        		
+	        		switch (eleccionOperacion) {
+	        		case 0:
+	        			
+	        			if(equipo[eleccionEquipo].AgregarJugador()) {
+	        				JOptionPane.showMessageDialog(null, "Se agrego exitosamente el jugador al equipo");
+	        				JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
+	        			} else {		
+	        				JOptionPane.showMessageDialog(null, "No se agrego ningun jugador al equipo");
+	        			}
+	        			break;
+	        			
+	        		case 1:
+	        			
+	        			if(equipo[eleccionEquipo].EliminarJugador()) {
+	        				JOptionPane.showMessageDialog(null, "Se elimino exitosamente el jugador del equipo");
+	        				JOptionPane.showMessageDialog(null, equipo[eleccionEquipo].toString());
+	        			} else {		
+	        				JOptionPane.showMessageDialog(null, "No se elimino ningun jugador del equipo");
+	        			}				
+	        			break;
+	        			
+	        		case 2:
+	        			
+	        			JOptionPane.showMessageDialog(null, "El " + equipo[eleccionEquipo].getNombreClub() +
+	        					" tiene " +  equipo[eleccionEquipo].CantidadJugadores() + " jugadores"); 				
+	        			break;
+	        			
+	        		case 3:
+	        			
+	        			JOptionPane.showMessageDialog(null, "Lista de jugadores: \n" + equipo[eleccionEquipo].ObtenerListaJugadores());
+	        			break;
+	        			
+	        		case 4:
+	        			
+	        			JOptionPane.showMessageDialog(null, "No se realizo ninguna modificacion en " + equipo[eleccionEquipo].getNombreClub());
+	        			break;
+	        			
+	        		default:
+	        			
+	        			break;
+	        			
+	        		}
+	        		
+	        	} else {
+	        		JOptionPane.showMessageDialog(null, "No se modifico ningun equipo");
+	        		
+	        	}
+			} while (eleccionEquipo != 7);
 			
-			
-		} while (eleccionOperacion != 4);
 		
 
 		
@@ -152,7 +165,7 @@ public class Main {
 		int eleccionEquipos = 0;
 		do {
 			String[] opciones= {"Agregar equipo", "Eliminar equipo", "Ver cantidad de equipos", "Ver lista de equipos", "Salir"};
-			eleccionEquipos = JOptionPane.showOptionDialog(null, "¿Desea comenzar los partidos?", "Partidos", 0, 0, null, opciones, opciones[0]);
+			eleccionEquipos = JOptionPane.showOptionDialog(null, "¿Desea agregar algun equipo a la liga?", "Partidos", 0, 0, null, opciones, opciones[0]);
 			
 			switch (eleccionEquipos) {
 			case 0:

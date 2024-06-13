@@ -78,10 +78,20 @@ public class Equipo {
 	//AGREGO JUGADOR ESPECIFICO
 	public boolean AgregarJugador() {
 		 boolean flag = false;
-		 String nombre = JOptionPane.showInputDialog("Ingrese nombre del jugador nuevo");
+		 String nombre;
+     	 do {
+     		nombre = JOptionPane.showInputDialog("Ingrese nombre del Jugador nuevo: ");
+     		if (nombre.equals("")) {
+					JOptionPane.showMessageDialog(null, "El nombre del jugador nuevo es invalido");
+					flag = false;
+				} else {
+					JOptionPane.showMessageDialog(null, "El nombre del jugador nuevo es valido");
+					flag = true;
+				}
+		 } while (flag != true);
 		 
-		  String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
-          String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);
+		 String[] posiciones = {"Portero", "Defensor", "Mediocampista", "Delantero"};
+         String posicion = (String) JOptionPane.showInputDialog(null, "Ingrese nombre de Posicion: ", "Posicion", JOptionPane.QUESTION_MESSAGE, null, posiciones, posiciones[0]);
 		 
 		 int numeroCamiseta = 0;
          do {	
