@@ -5,12 +5,14 @@ public class Jugador {
 	private  String posicion;
 	private  int numeroCamiseta;
 	private  int edad;
+	private  int gol;
 	
-	public Jugador(String nombre, String posicion, int numeroCamiseta, int edad) {
+    public Jugador(String nombre, String posicion, int numeroCamiseta, int edad) {
 		this.nombre = nombre;
 		this.posicion = posicion;
 		this.numeroCamiseta = numeroCamiseta;
 		this.edad = edad;
+		this.gol=0;
 	}
 
 	public String getNombre() {
@@ -45,13 +47,24 @@ public class Jugador {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-
 	
+	
+	public int getGol() {
+        return gol;
+    }
+
+    public void setGol(int goles) {
+        this.gol = goles;
+    }
+
 	@Override
 	public String toString() {
 		return "Jugador [nombre=" + nombre + ", posicion=" + posicion + ", numeroCamiseta=" + numeroCamiseta + ", edad="
-				+ edad + "]" + "\n";
+				+ edad + ", gol=" + gol + "\n]";
 	}
+
+	
+	
 	
 	
 	

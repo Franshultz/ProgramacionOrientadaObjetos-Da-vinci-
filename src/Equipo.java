@@ -31,7 +31,7 @@ public class Equipo {
 	}
 
 	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
+	    this.ciudad = ciudad;
 	}
 
 

@@ -5,70 +5,48 @@ import javax.swing.JOptionPane;
 public class GestorEquipos {
 	
 	private LinkedList<Equipo> equipos;
+	private LinkedList<Partido> partidos = new LinkedList<Partido>();
 
 	public GestorEquipos(LinkedList<Equipo> equipos) {
         this.equipos = equipos;
+        this.partidos = new LinkedList<>();;
     }
 
-	
+
 	public LinkedList<Equipo> getEquipos() {
-        return equipos;
-    }
+		return equipos;
+	}
 
-    public void setEquipos(LinkedList<Equipo> equipos) {
-        this.equipos = equipos;
-    }
-    
-    
-	
+
+
+
+	public void setEquipos(LinkedList<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+
+
+
+
+	public LinkedList<Partido> getPartidos() {
+		return partidos;
+	}
+
+
+
+
+	public void setPartidos(LinkedList<Partido> partidos) {
+		this.partidos = partidos;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "GestorEquipos [Equipos=" + equipos + "]";
+		return "GestorEquipos [equipos=" + equipos + ", partidos=" + partidos + "\n]";
 	}
 
 
-	
-	//METODO PARA JUGAR PARTIDO ENTRE 2 CLUEBS
-	public String JugarPartido() {
-		
-		boolean flag = false;
-		int equipoRandom1 = 0;
-        int equipoRandom2 = 0;
-		while (!flag) {
-			 
-	        equipoRandom1 = (int) (Math.random() * equipos.size());
-	        equipoRandom2 = (int) (Math.random() * equipos.size());
-
-	        if (equipoRandom1 != equipoRandom2) {
-	            flag = true;
-	        }
-	            
-	    }
-
-	    Equipo equipo1 = equipos.get(equipoRandom1);
-	    Equipo equipo2 = equipos.get(equipoRandom2);
-	    
-		int golesRandom1 = (int)(Math.random()*4);
-		int golesRandom2 = (int)(Math.random()*4);
-		
-		equipo1.setGoles(equipo1.getGoles() + golesRandom1);
-		equipo2.setGoles(equipo2.getGoles() + golesRandom2);
-		
-		if (golesRandom1 > golesRandom2) {
-			equipo1.setPuntos(equipo1.getPuntos() + 3);
-		} else if (golesRandom2 > golesRandom1){
-			equipo2.setPuntos(equipo2.getPuntos() + 3);
-		} else {
-			equipo1.setPuntos(equipo1.getPuntos() + 1);
-			equipo2.setPuntos(equipo2.getPuntos() + 1);
-		}
-		
-		return "El partido termino: \n" +
-		equipo1.getNombreClub() + " " + golesRandom1  + "   " + golesRandom2 + " " + equipo2.getNombreClub();
-	}
-	
-	
-	
 	//METODO PARA AGREGAR UN EQUIPO CON SUS RESPECTIVOS JUGADORES
 	public boolean AgregarEquipo() {
 		
@@ -191,8 +169,64 @@ public class GestorEquipos {
 	}
 	
 	
+	public Partido JugarPartido(Equipo equipo1, Equipo equipo2) {
+	    if (equipo1 == equipo2) {
+	        JOptionPane.showMessageDialog(null, "No se puede jugar partido entre ambos equipos iguales");
+	        return null;
+	    } else {
+	        if (equipo1.getJugadores().size() < 7 || equipo2.getJugadores().size() < 7) {
+	            JOptionPane.showMessageDialog(null, "No se puede jugar el partido por falta de jugadores");
+	            return null;
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Se enfrentan " + equipo1.getNombreClub() + " y " + equipo2.getNombreClub());
+	            int goles1;
+	            int goles2;
+	            int goleador1;
+	            int goleador2;
+	            do {
+	                goles1 = (int)(Math.random() * 5);
+	                goles2 = (int)(Math.random() * 5);
+	                if (goles1 == goles2) {
+	                    JOptionPane.showMessageDialog(null, "Hay penales");
+	                }
+	            } while (goles1 == goles2);
+
+	           
+	            goleador1 = (int)(Math.random() * equipo1.getJugadores().size());
+	            goleador2 = (int)(Math.random() * equipo2.getJugadores().size());
+
+	            
+	            Jugador jugadorGoleador1 = equipo1.getJugadores().get(goleador1);
+	            Jugador jugadorGoleador2 = equipo2.getJugadores().get(goleador2);
+
+	            jugadorGoleador1.setGol(jugadorGoleador1.getGol() + goles1);
+	            jugadorGoleador2.setGol(jugadorGoleador2.getGol() + goles2);
+
+	            
+	            System.out.println("Jugador goleador del equipo 1: " + jugadorGoleador1.getNombre() + " con " + goles1 + " goles.");
+	            System.out.println("Jugador goleador del equipo 2: " + jugadorGoleador2.getNombre() + " con " + goles2 + " goles.");
+
+	            return new Partido(equipo1, equipo2, goles1, goles2);
+	        }
+	    }
+	}
+
 	
-	
+	public String VerGoleador() {
+	    int maxGoles = 0; 
+	    String goleadorNombre = "No hay goleador registrado";
+
+	    for (Equipo equipo : equipos) {
+	        for (Jugador jugador : equipo.getJugadores()) {
+	            if (jugador.getGol() > maxGoles) {
+	                maxGoles = jugador.getGol();
+	                goleadorNombre = jugador.getNombre();
+	            }
+	        }
+	    }
+
+	    return goleadorNombre;
+	}
 	
 	
 }
