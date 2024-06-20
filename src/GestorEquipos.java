@@ -1,3 +1,4 @@
+ import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -9,7 +10,7 @@ public class GestorEquipos {
 
 	public GestorEquipos(LinkedList<Equipo> equipos) {
         this.equipos = equipos;
-        this.partidos = new LinkedList<>();;
+        this.partidos = new LinkedList<>();
     }
 
 
@@ -164,8 +165,12 @@ public class GestorEquipos {
 	
 	
 	//RETORNO LISTA DE EQUIPOS
-	public LinkedList<Equipo> ObtenerListaEquipos() {
-		return equipos;
+	public String[] ObtenerListaEquipos() {
+		String[] nombresEquipos = new String[equipos.size()];
+		for (int i = 0; i < equipos.size(); i++) {
+			nombresEquipos[i] = equipos.get(i).getNombreClub();
+		}
+		return nombresEquipos;
 	}
 	
 	
