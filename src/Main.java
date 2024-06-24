@@ -205,25 +205,25 @@ public class Main {
         	switch (eleccion) {
 			case 0:
 				
-				if(Partido.getCantPartidos() >= 6){
+				if(Partido.getCantPartidos() > 6){
         			Partido jugado = torneo.JugarPartido(SeleccionarEquipo(listaEquiposFinalistas, "partidos"), SeleccionarEquipo(listaEquiposFinalistas, "partidos"));
-        			JOptionPane.showMessageDialog(null,"Ganador: " + jugado.DeterminarGanador());	
         			torneo.getPartidos().add(jugado);
-        			JOptionPane.showMessageDialog(null, "El ganador de la final es: " + jugado);
+        			JOptionPane.showMessageDialog(null, "Partido finalizado: " + jugado);
+        			JOptionPane.showMessageDialog(null, "Ganador de la final es: " + jugado.DeterminarGanador().getNombreClub());	
         			
-        		} else if (Partido.getCantPartidos() >= 4 ) {
+        		} else if (Partido.getCantPartidos() > 4 ) {
 					Partido jugado = torneo.JugarPartido(SeleccionarEquipo(listaEquiposSemifinalistas, "partidos"), SeleccionarEquipo(listaEquiposSemifinalistas, "partidos"));
 					torneo.getPartidos().add(jugado);
-					JOptionPane.showMessageDialog(null,"Se jugo el partido: " + jugado);
-					JOptionPane.showMessageDialog(null,"Ganador: " + jugado.DeterminarGanador());	
 					listaEquiposFinalistas.add(jugado.DeterminarGanador());
+					JOptionPane.showMessageDialog(null,"Partido finalizado: " + jugado);
+					JOptionPane.showMessageDialog(null,"Ganador de la semifinal es: " + jugado.DeterminarGanador().getNombreClub());	
 
 				} else {
 					Partido jugado = torneo.JugarPartido(SeleccionarEquipo(torneo.getEquipos(), "partidos"), SeleccionarEquipo(torneo.getEquipos(), "partidos"));
 					torneo.getPartidos().add(jugado);
-					JOptionPane.showMessageDialog(null,"Se jugo el partido: " + jugado);
-					JOptionPane.showMessageDialog(null,"Ganador: " + jugado.DeterminarGanador());	
 					listaEquiposSemifinalistas.add(jugado.DeterminarGanador());
+					JOptionPane.showMessageDialog(null,"Partido finalizado: " + jugado);
+					JOptionPane.showMessageDialog(null,"Ganador de los cuartos de final es: " + jugado.DeterminarGanador().getNombreClub());	
 					
 				}
 				break;

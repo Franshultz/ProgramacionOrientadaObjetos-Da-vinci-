@@ -9,21 +9,24 @@ public class Partido {
     private Equipo equipo2;
     private int goles1;
     private int goles2;
+    private int penales1;
+    private int penales2;
     private String fase;
     private LocalDate fecha;
     private String estado;
     private static int cantPartidos;
 
-    public Partido(Equipo equipo1, Equipo equipo2, int goles1, int goles2) {
+    public Partido(Equipo equipo1, Equipo equipo2, int goles1, int goles2, int penales1, int penales2) {
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
         this.goles1 = goles1;
         this.goles2 = goles2;
+        this.penales1 = penales1;
+        this.penales2 = penales2;
         this.fase = determinarFase();
         this.fecha = determinarFecha();
         this.estado = "Pendiente";
         cantPartidos++;
-        JOptionPane.showMessageDialog(null, toString());
     }
 
     public Equipo getEquipo1() {
@@ -71,8 +74,23 @@ public class Partido {
 	public void setGoles2(int goles2) {
 		this.goles2 = goles2;
 	}
+	
 
+	public int getPenales1() {
+		return penales1;
+	}
 
+	public void setPenales1(int penales1) {
+		this.penales1 = penales1;
+	}
+
+	public int getPenales2() {
+		return penales2;
+	}
+
+	public void setPenales2(int penales2) {
+		this.penales2 = penales2;
+	}
 
 	public String getFase() {
 		return fase;
@@ -124,16 +142,17 @@ public class Partido {
 
 	@Override
     public String toString() {
-        return "El partido salio [equipo1=" + equipo1.getNombreClub() + ", goles1=" + goles1 + "  " + ", goles2=" + goles2 + ", equipo2=" + equipo2.getNombreClub() + 
-                 ", fase=" + fase + ", fecha=" + fecha + ", estado=" + estado + "\n]";
+        return "" + equipo1.getNombreClub() + " " + goles1 + " - " + goles2 + " " + equipo2.getNombreClub() + 
+                 ", fase=" + fase + ", fecha=" + fecha + ", estado=" + estado + "\n";
     }
+	
 
     public String determinarFase() {
-        if (cantPartidos <= 4) {
+        if (cantPartidos < 4) {
             return "Cuartos de final";
-        } else if (cantPartidos <= 6) {
+        } else if (cantPartidos < 6) {
             return "Semifinal";
-        } else if (cantPartidos <= 7) {
+        } else if (cantPartidos < 7) {
             return "Final";
         }
         return "null";
@@ -157,9 +176,18 @@ public class Partido {
     	if (this.getGoles1() > this.getGoles2()) {
     		this.setEstado("Jugado");
 			return this.getEquipo1();
-		} else {
+		} else if (this.getGoles1() < this.getGoles2()) {
 			this.setEstado("Jugado");
 			return this.getEquipo2();
+		} else {
+			if (this.getPenales1() > this.getPenales2()) {
+				this.setEstado("Jugado");
+				return this.getEquipo1();
+			} else if (this.getPenales1() < this.getPenales2()){
+				this.setEstado("Jugado");
+				return this.getEquipo2();
+			}
 		}
+    	return null;
     }
 }
