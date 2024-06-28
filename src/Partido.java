@@ -1,7 +1,5 @@
 import java.time.LocalDate;
-import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
 
 public class Partido {
 
@@ -14,7 +12,7 @@ public class Partido {
     private String fase;
     private LocalDate fecha;
     private String estado;
-    private static int cantPartidos;
+    private static int cantPartidos = 0;
 
     public Partido(Equipo equipo1, Equipo equipo2, int goles1, int goles2, int penales1, int penales2) {
         this.equipo1 = equipo1;

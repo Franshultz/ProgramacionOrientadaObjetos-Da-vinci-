@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -170,19 +169,20 @@ public class GestorEquipos {
 						"Se enfrentan " + equipo1.getNombreClub() + " y " + equipo2.getNombreClub());
 				int goles1;
 				int goles2;
-				int goleador1;
-				int goleador2;
-				int golesPenales1 = 0;
-				int golesPenales2 = 0;
+				
 				int penales1 = 0;
 				int penales2 = 0;
+				
+				int golesPenales1 = 0;
+				int golesPenales2 = 0;
+				
 
 				goles1 = (int) (Math.random() * 5);
 				goles2 = (int) (Math.random() * 5);
 				if (goles1 == goles2) {
 					JOptionPane.showMessageDialog(null, "Hay penales");
 					for (int i = 0; i < 6; i++) {
-						golesPenales1 = (int) (Math.random() * 1);
+						golesPenales1 = (int)(Math.random() * 2);
 						penales1 += golesPenales1;
 						if (golesPenales1 == 1) {
 							JOptionPane.showMessageDialog(null, "Convirtio el penal " + equipo1.getNombreClub());
@@ -190,7 +190,7 @@ public class GestorEquipos {
 							JOptionPane.showMessageDialog(null, "Erro el penal  " + equipo1.getNombreClub());
 
 						}
-						golesPenales2 = (int) (Math.random() * 1);
+						golesPenales2 = (int)(Math.random() * 2);
 						penales2 += golesPenales2;
 						if (golesPenales2 == 1) {
 							JOptionPane.showMessageDialog(null, "Convirtio el penal " + equipo2.getNombreClub());
@@ -202,7 +202,7 @@ public class GestorEquipos {
 					if (golesPenales1 == golesPenales2) {
 						boolean flag = false;
 						do {
-							golesPenales1 = (int) (Math.random() * 1);
+							golesPenales1 = (int) (Math.random() * 2);
 							penales1 += golesPenales1;
 							if (golesPenales1 == 1) {
 								JOptionPane.showMessageDialog(null, "Convirtio el penal " + equipo1.getNombreClub());
@@ -210,7 +210,7 @@ public class GestorEquipos {
 								JOptionPane.showMessageDialog(null, "Erro el penal  " + equipo1.getNombreClub());
 							}
 							
-							golesPenales2 = (int) (Math.random() * 1);
+							golesPenales2 = (int) (Math.random() * 2);
 							penales2 += golesPenales2;
 							if (golesPenales2 == 1) {
 								JOptionPane.showMessageDialog(null, "Convirtio el penal " + equipo2.getNombreClub());
@@ -226,12 +226,13 @@ public class GestorEquipos {
 
 				}
 
-				goleador1 = (int) (Math.random() * equipo1.getJugadores().size());
-				goleador2 = (int) (Math.random() * equipo2.getJugadores().size());
+				int goleador1 = (int)(Math.random() * 2 + 8);
+				int goleador2 = (int)(Math.random() * 2 + 8);
 
 				Jugador jugadorGoleador1 = equipo1.getJugadores().get(goleador1);
 				Jugador jugadorGoleador2 = equipo2.getJugadores().get(goleador2);
 
+				
 				jugadorGoleador1.setGol(jugadorGoleador1.getGol() + goles1);
 				jugadorGoleador2.setGol(jugadorGoleador2.getGol() + goles2);
 
@@ -246,13 +247,13 @@ public class GestorEquipos {
 		String goleadorNombre = "No hay goleador registrado";
 
 		for (Equipo equipo : equipos) {
-			for (Jugador jugador : equipo.getJugadores()) {
-				if (jugador.getGol() > maxGoles) {
-					maxGoles = jugador.getGol();
-					goleadorNombre = jugador.getNombre();
-				}
-			}
-		}
+	        for (Jugador jugador : equipo.getJugadores()) {
+	            if (jugador.getGol() > maxGoles) {
+	                maxGoles = jugador.getGol();
+	                goleadorNombre = jugador.getNombre();
+	            }
+	        }
+	    }
 
 		return goleadorNombre;
 	}

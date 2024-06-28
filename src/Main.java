@@ -1,4 +1,7 @@
+import java.net.URL;
 import java.util.LinkedList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -89,7 +92,18 @@ public class Main {
         do {
         	do {
         		String[] opcionOperacionesTorneo = {"Agregar equipo", "Eliminar equipo", "Ver cantidad de equipos", "Ver lista de equipos", "Salir"};
-        		eleccionOperacionTorneo = JOptionPane.showOptionDialog(null, "¿Desea realizar alguna operacion de algun equipo del torneo?", "Partidos", 0, 0, null, opcionOperacionesTorneo, opcionOperacionesTorneo[0]);
+        		ImageIcon icon = new ImageIcon(Main.class.getResource("/img/copa.jpeg"));
+        		eleccionOperacionTorneo = JOptionPane.showOptionDialog(
+                        null, 
+                        "¿Desea realizar alguna operación de algún equipo del torneo?", 
+                        "Partidos", 
+                        JOptionPane.DEFAULT_OPTION, 
+                        JOptionPane.INFORMATION_MESSAGE, 
+                        icon, 
+                        opcionOperacionesTorneo, 
+                        opcionOperacionesTorneo[0]
+                );
+        		
         		
         		switch (eleccionOperacionTorneo) {
         		case 0:
@@ -139,9 +153,20 @@ public class Main {
             do {
                 eleccionEquipo = SeleccionarEquipo(torneo.getEquipos(), "operaciones");
 
-                if (eleccionEquipo != null) {
+                if (eleccionEquipo != null) {               	
                     String[] operacion = {"Agregar Jugador", "Eliminar Jugador", "Ver cantidad de jugadores", "Obtener lista de jugadores", "Salir"};
-                    eleccionOperacionEquipo = JOptionPane.showOptionDialog(null, "Elija una opcion", "Menu", 0, 0, null, operacion, operacion[0]);
+                    ImageIcon icon1 = new ImageIcon(Main.class.getResource("/img/escudos.jpg"));
+                    eleccionOperacionEquipo = JOptionPane.showOptionDialog(
+                            null, 
+                            "Elija una opcion", 
+                            "Menu", 
+                            JOptionPane.DEFAULT_OPTION, 
+                            JOptionPane.INFORMATION_MESSAGE, 
+                            icon1, 
+                            operacion, 
+                            operacion[0]
+                    );
+                  
 
                     switch (eleccionOperacionEquipo) {
                         case 0:
@@ -201,17 +226,30 @@ public class Main {
         int eleccion = 0;
         do {	
         	String[] opciones = {"Comenzar partido", "Ver partidos", "Ver Goleador", "Salir"};
-        	eleccion = JOptionPane.showOptionDialog(null, "Elija una opcion", "Partidos", 0, 0, null, opciones, opciones[0]);
+        	ImageIcon icon3 = new ImageIcon(Main.class.getResource("/img/cancha.jpg"));
+        	eleccion = JOptionPane.showOptionDialog(
+                    null, 
+                    "Elija una opcion", 
+                    "Partidos", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE, 
+                    icon3, 
+                    opciones, 
+                    opciones[0]
+            );
+        	
         	switch (eleccion) {
 			case 0:
 				
-				if(Partido.getCantPartidos() > 6){
-        			Partido jugado = torneo.JugarPartido(SeleccionarEquipo(listaEquiposFinalistas, "partidos"), SeleccionarEquipo(listaEquiposFinalistas, "partidos"));
-        			torneo.getPartidos().add(jugado);
-        			JOptionPane.showMessageDialog(null, "Partido finalizado: " + jugado);
-        			JOptionPane.showMessageDialog(null, "Ganador de la final es: " + jugado.DeterminarGanador().getNombreClub());	
+				if(Partido.getCantPartidos() < 4){
         			
-        		} else if (Partido.getCantPartidos() > 4 ) {
+        			Partido jugado = torneo.JugarPartido(SeleccionarEquipo(torneo.getEquipos(), "partidos"), SeleccionarEquipo(torneo.getEquipos(), "partidos"));
+        			torneo.getPartidos().add(jugado);
+        			listaEquiposSemifinalistas.add(jugado.DeterminarGanador());
+        			JOptionPane.showMessageDialog(null,"Partido finalizado: " + jugado);
+        			JOptionPane.showMessageDialog(null,"Ganador de los cuartos de final es: " + jugado.DeterminarGanador().getNombreClub());	
+        		} else if (Partido.getCantPartidos() < 6) {
+        			
 					Partido jugado = torneo.JugarPartido(SeleccionarEquipo(listaEquiposSemifinalistas, "partidos"), SeleccionarEquipo(listaEquiposSemifinalistas, "partidos"));
 					torneo.getPartidos().add(jugado);
 					listaEquiposFinalistas.add(jugado.DeterminarGanador());
@@ -219,12 +257,11 @@ public class Main {
 					JOptionPane.showMessageDialog(null,"Ganador de la semifinal es: " + jugado.DeterminarGanador().getNombreClub());	
 
 				} else {
-					Partido jugado = torneo.JugarPartido(SeleccionarEquipo(torneo.getEquipos(), "partidos"), SeleccionarEquipo(torneo.getEquipos(), "partidos"));
-					torneo.getPartidos().add(jugado);
-					listaEquiposSemifinalistas.add(jugado.DeterminarGanador());
-					JOptionPane.showMessageDialog(null,"Partido finalizado: " + jugado);
-					JOptionPane.showMessageDialog(null,"Ganador de los cuartos de final es: " + jugado.DeterminarGanador().getNombreClub());	
 					
+					Partido jugado = torneo.JugarPartido(SeleccionarEquipo(listaEquiposFinalistas, "partidos"), SeleccionarEquipo(listaEquiposFinalistas, "partidos"));
+					torneo.getPartidos().add(jugado);
+					JOptionPane.showMessageDialog(null, "Partido finalizado: " + jugado);
+					JOptionPane.showMessageDialog(null, "Ganador de la final es: " + jugado.DeterminarGanador().getNombreClub());	
 				}
 				break;
 				
@@ -249,7 +286,8 @@ public class Main {
 
     }
      
-    public static Equipo SeleccionarEquipo(LinkedList<Equipo> equipos, String llamado) {
+
+	public static Equipo SeleccionarEquipo(LinkedList<Equipo> equipos, String llamado) {
 
     	String[] equiposArray  = new String[equipos.size()]; 
     	if ("operaciones".equals(llamado)) {

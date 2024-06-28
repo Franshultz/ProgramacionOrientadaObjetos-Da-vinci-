@@ -53,8 +53,8 @@ public class Jugador {
         return gol;
     }
 
-    public void setGol(int goles) {
-        this.gol = goles;
+    public void setGol(int gol) {
+        this.gol = gol;
     }
 
 	@Override
